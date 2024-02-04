@@ -1,27 +1,32 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
+import hello.hellospring.repository.JdbcTemplateMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Transactional
+@RequiredArgsConstructor
 public class MemberService {
-    private final MemberRepository memberRepository;
+    private final JdbcTemplateMemberRepository memberRepository;
 
-    @Autowired // 의존관계 주입 (DI)
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+//    @Autowired // 의존관계 주입 (DI)
+//    public MemberService(JdbcTemplateMemberRepository JdbcTemplateMemberRepository) {
+//        this.memberRepository = JdbcTemplateMemberRepository;
+//    }
 
     /**
      * 회원가입
      */
-    public Long join(Member member) {
+    public Long join(Member member) throws SQLException {
         validateDuplicateMember(member);
 
         memberRepository.save(member);

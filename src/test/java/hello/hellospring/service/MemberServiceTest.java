@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,11 +17,11 @@ public class MemberServiceTest {
     MemberService memberService;
     MemoryMemberRepository memberRepository;
 
-    @BeforeEach
-    public void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
-    }
+//    @BeforeEach
+//    public void beforeEach() {
+//        memberRepository = new MemoryMemberRepository();
+//        memberService = new MemberService(memberRepository);
+//    }
 
     @AfterEach
     public void afterEach() {
@@ -27,7 +29,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    void 회원가입() {
+    void 회원가입() throws SQLException {
         // 뭔가가 주어졌는데, 이것을 선택했는데, 이런 결과가 나온다
         //given
         Member member = new Member();
@@ -42,7 +44,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void 중복_회원_예외() {
+    public void 중복_회원_예외() throws SQLException {
         // given
         Member member1 = new Member();
         member1.setName("spring");

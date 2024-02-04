@@ -4,12 +4,14 @@ import hello.hellospring.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
+//@Transactional // 테스트 데이터를 DB에 반영 X
 class MemoryMemberRepositoryTest { // 순서와 상관없이 테스트가 실행된다. 순서에 의존해서 설계하면 안된다.
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
